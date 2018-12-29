@@ -1,0 +1,29 @@
+{
+  "name": "jonas-jensen-next",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "test": "jest --watch"
+  },
+  "keywords": [],
+  "author": "Jonas Jensen (https://jonas-jensen.com) <jonas.jensen@msn.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cpy": "^7.0.1"
+  },
+  "devDependencies": {
+    "husky": "^1.3.1",
+    "prettier": "^1.15.3",
+    "pretty-quick": "^1.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "pretty-quick --staged"
+    }
+  }
+}
