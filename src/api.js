@@ -1,10 +1,11 @@
 const { join } = require("path");
 const { promisify } = require("util");
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 const { createWriteStream } = require("fs");
 const { writeFile } = require("gitignore");
 const { run } = require("npm-check-updates");
 const cpy = require("cpy");
+const opn = require("opn");
 
 const execP = promisify(exec);
 const writeFileP = promisify(writeFile);
@@ -39,9 +40,24 @@ const createGitIgnore = async (fileDirectory, types) => {
   await Promise.all(promises);
 };
 
-const installDependencies = async () => {
-  const { stdout, stderr } = await execP("npm install");
-  return stderr || stdout;
+const installDependencies = async () =>
+  new Promise((resolve, reject) => {
+    const child = spawn("npm", ["install"]);
+    child.stdout.on("data", data => process.stdout.write(data));
+    child.stderr.on("data", data => process.stdout.write(data));
+    child.on("error", data => reject("npm install error:" + data));
+    child.on("exit", resolve);
+  });
+
+const runDevServer = async () => {
+  const child = spawn("npm", ["run", "dev"]);
+  child.stdout.on("data", data => process.stdout.write(data));
+  child.stderr.on("data", data => process.stdout.write(data));
+  child.on("error", data => console.log("Error!", data));
+
+  setTimeout(() => opn("http://localhost:3000"), 5000);
+
+  return child;
 };
 
 module.exports = {
@@ -49,5 +65,6 @@ module.exports = {
   gitInit,
   upgradePackageJson,
   createGitIgnore,
-  installDependencies
+  installDependencies,
+  runDevServer
 };

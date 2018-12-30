@@ -18,6 +18,7 @@
     "gitignore": "^0.6.0",
     "meow": "^5.0.0",
     "npm-check-updates": "^2.15.0",
+    "opn": "^5.4.0",
     "valid-filename": "^2.0.1"
   },
   "devDependencies": {

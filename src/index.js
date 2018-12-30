@@ -9,7 +9,8 @@ const {
   gitInit,
   upgradePackageJson,
   createGitIgnore,
-  installDependencies
+  installDependencies,
+  runDevServer
 } = require("./api");
 
 (async () => {
@@ -45,4 +46,7 @@ const {
   console.log("Installing npm dependencies..");
   console.log(await installDependencies());
   console.log("Dependencies installed");
+
+  console.log("Starting dev server..");
+  await runDevServer();
 })();
