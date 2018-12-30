@@ -11,8 +11,12 @@
     "test": "jest --watch"
   },
   "keywords": [],
-  "author": "Jonas Jensen (https://jonas-jensen.com) <jonas.jensen@msn.com>",
-  "license": "ISC",
+  "author": {
+    "name": "Jonas Jensen",
+    "email": "jonas.jensen@msn.com",
+    "url": "https://jonas-jensen.com"
+  },
+  "license": "MIT",
   "dependencies": {
     "next": "0.0.0",
     "react": "0.0.0",

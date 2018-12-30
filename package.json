@@ -1,18 +1,27 @@
 {
-  "name": "jonas-jensen-next",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export",
-    "test": "jest --watch"
+  "name": "init-project",
+  "version": "0.1.0",
+  "description": "Default Next.js project scaffolding",
+  "keywords": [
+    "scaffold",
+    "cli"
+  ],
+  "author": {
+    "name": "Jonas Jensen",
+    "email": "jonas.jensen@msn.com",
+    "url": "https://jonas-jensen.com"
   },
-  "keywords": [],
-  "author": "Jonas Jensen (https://jonas-jensen.com) <jonas.jensen@msn.com>",
-  "license": "ISC",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "bin": {
+    "init": "src/index.js"
+  },
+  "files": [
+    "resources",
+    "src"
+  ],
   "dependencies": {
     "cpy": "^7.0.1",
     "gitignore": "^0.6.0",

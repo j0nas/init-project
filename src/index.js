@@ -15,8 +15,8 @@ const {
 
 (async () => {
   const cli = meow(`
-  Usage
-    $ newp <project-name>`);
+  Usage:
+    $ init <project-name>`);
 
   const targetDirectory = cli.input[0];
   if (!isValid(targetDirectory)) {
