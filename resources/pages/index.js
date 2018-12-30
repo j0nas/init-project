@@ -1,5 +1,1 @@
-export default () => (
-    <div>
-      Hi
-    </div>
-  );
+export default () => <div>Start editing /pages/index.js!</div>;
