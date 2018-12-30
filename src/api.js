@@ -2,6 +2,8 @@ const path = require('path');
 const cpy = require('cpy');
 const { promisify } = require('util');
 const { exec } = require('child_process');
+const { run } = require('npm-check-updates');
+
 const execP = promisify(exec);
 
 const copyFiles = async directoryName => {
@@ -21,7 +23,11 @@ const gitInit = async () => {
   return stdout;
 };
 
+const upgradePackageJson = async packageJsonPath =>
+  run({ packageFile: packageJsonPath, upgrade: true, upgradeAll: true });
+
 module.exports = {
   copyFiles,
   gitInit,
+  upgradePackageJson,
 };

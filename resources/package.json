@@ -14,15 +14,15 @@
   "author": "Jonas Jensen (https://jonas-jensen.com) <jonas.jensen@msn.com>",
   "license": "ISC",
   "dependencies": {
-    "next": "*",
-    "react": "*",
-    "react-dom": "*"
+    "next": "0.0.0",
+    "react": "0.0.0",
+    "react-dom": "0.0.0"
   },
   "devDependencies": {
-    "husky": "*",
-    "jest": "*",
-    "prettier": "*",
-    "pretty-quick": "*"
+    "husky": "0.0.0",
+    "jest": "0.0.0",
+    "prettier": "0.0.0",
+    "pretty-quick": "0.0.0"
   },
   "husky": {
     "hooks": {

@@ -4,7 +4,7 @@
 const isValid = require('valid-filename');
 const meow = require('meow');
 const { join } = require('path');
-const { copyFiles, gitInit } = require('./api');
+const { copyFiles, gitInit, upgradePackageJson } = require('./api');
 
 (async () => {
   const cli = meow(`
@@ -24,4 +24,8 @@ const { copyFiles, gitInit } = require('./api');
   const createdProjectDirectory = join(process.cwd(), targetDirectory);
   process.chdir(createdProjectDirectory);
   console.log(await gitInit());
+
+  const packageJsonPath = join(createdProjectDirectory, 'package.json');
+  await upgradePackageJson(packageJsonPath);
+  console.log("Upgraded package.json dependency versions");
 })();
