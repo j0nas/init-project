@@ -1,6 +1,6 @@
 # create-new-project
 
-> `npm install create-new-project`  
+> `npm install --global create-new-project`  
 > `init <my-project-name>`
 
 Simple Next.js scaffolding for new projects.  
