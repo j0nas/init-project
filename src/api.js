@@ -39,9 +39,15 @@ const createGitIgnore = async (fileDirectory, types) => {
   await Promise.all(promises);
 };
 
+const installDependencies = async () => {
+  const { stdout, stderr } = await execP("npm install");
+  return stderr || stdout;
+};
+
 module.exports = {
   copyFiles,
   gitInit,
   upgradePackageJson,
-  createGitIgnore
+  createGitIgnore,
+  installDependencies
 };
