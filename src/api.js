@@ -49,6 +49,13 @@ const installDependencies = async () =>
     child.on("exit", resolve);
   });
 
+const gitInitCommit = async () => {
+  const { stdout, stderr } = await execP(
+    'git add --all && git commit --message "init commit"'
+  );
+  return stdout || stderr;
+};
+
 const runDevServer = async () => {
   const child = spawn("npm", ["run", "dev"]);
   child.stdout.on("data", data => process.stdout.write(data));
@@ -66,5 +73,6 @@ module.exports = {
   upgradePackageJson,
   createGitIgnore,
   installDependencies,
+  gitInitCommit,
   runDevServer
 };
