@@ -3,7 +3,8 @@
 
 const isValid = require('valid-filename');
 const meow = require('meow');
-const { copyFiles } = require('./api');
+const { join } = require('path');
+const { copyFiles, gitInit } = require('./api');
 
 (async () => {
   const cli = meow(`
@@ -19,4 +20,8 @@ const { copyFiles } = require('./api');
   const dirPath = await copyFiles(targetDirectory);
   console.log('Successfully created new project:');
   console.log(dirPath);
+
+  const createdProjectDirectory = join(process.cwd(), targetDirectory);
+  process.chdir(createdProjectDirectory);
+  console.log(await gitInit());
 })();
