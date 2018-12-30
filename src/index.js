@@ -4,7 +4,7 @@
 const isValid = require('valid-filename');
 const meow = require('meow');
 const { join } = require('path');
-const { copyFiles, gitInit, upgradePackageJson } = require('./api');
+const { copyFiles, gitInit, upgradePackageJson, createGitIgnore } = require('./api');
 
 (async () => {
   const cli = meow(`
@@ -28,4 +28,7 @@ const { copyFiles, gitInit, upgradePackageJson } = require('./api');
   const packageJsonPath = join(createdProjectDirectory, 'package.json');
   await upgradePackageJson(packageJsonPath);
   console.log("Upgraded package.json dependency versions");
+
+  await createGitIgnore(createdProjectDirectory, ['Node', 'Global/JetBrains', 'Global/macOS']);
+  console.log("Created .gitignore");
 })();
