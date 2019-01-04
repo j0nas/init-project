@@ -8,7 +8,6 @@ const {
   copyFiles,
   gitInit,
   upgradePackageJson,
-  createGitIgnore,
   installDependencies,
   gitInitCommit,
   runDevServer
@@ -35,16 +34,10 @@ const {
 
   const packageJsonPath = join(createdProjectDirectory, "package.json");
   await upgradePackageJson(packageJsonPath);
-  console.log("Upgraded package.json dependency versions");
+  console.log(
+    "Upgraded package.json dependency versions, installing dependencies .."
+  );
 
-  await createGitIgnore(createdProjectDirectory, [
-    "Node",
-    "Global/JetBrains",
-    "Global/macOS"
-  ]);
-  console.log("Created .gitignore");
-
-  console.log("Installing npm dependencies..");
   console.log(await installDependencies());
   console.log("Dependencies installed");
 

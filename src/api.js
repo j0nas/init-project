@@ -1,19 +1,16 @@
 const { join } = require("path");
 const { promisify } = require("util");
 const { exec, spawn } = require("child_process");
-const { createWriteStream } = require("fs");
-const { writeFile } = require("gitignore");
 const { run } = require("npm-check-updates");
 const cpy = require("cpy");
 const opn = require("opn");
 
 const execP = promisify(exec);
-const writeFileP = promisify(writeFile);
 
 const copyFiles = async directoryName => {
   const targetPath = join(process.cwd(), directoryName);
   const cwd = join(__dirname, "..", "resources");
-  await cpy("**/*", targetPath, { cwd, parents: true });
+  await cpy(["**/*", ".gitignore"], targetPath, { cwd, parents: true });
 
   return targetPath;
 };
@@ -29,16 +26,6 @@ const gitInit = async () => {
 
 const upgradePackageJson = async packageJsonPath =>
   run({ packageFile: packageJsonPath, upgrade: true, upgradeAll: true });
-
-const createGitIgnore = async (fileDirectory, types) => {
-  const gitIgnorePath = join(fileDirectory, ".gitignore");
-  const promises = types.map(type => {
-    const file = createWriteStream(gitIgnorePath, { flags: "a" });
-    return writeFileP({ type, file });
-  });
-
-  await Promise.all(promises);
-};
 
 const installDependencies = async () =>
   new Promise((resolve, reject) => {
@@ -71,7 +58,6 @@ module.exports = {
   copyFiles,
   gitInit,
   upgradePackageJson,
-  createGitIgnore,
   installDependencies,
   gitInitCommit,
   runDevServer

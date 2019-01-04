@@ -24,7 +24,6 @@
   ],
   "dependencies": {
     "cpy": "^7.0.1",
-    "gitignore": "^0.6.0",
     "meow": "^5.0.0",
     "npm-check-updates": "^2.15.0",
     "opn": "^5.4.0",
