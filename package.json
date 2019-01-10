@@ -1,7 +1,6 @@
 {
   "name": "create-new-project",
   "version": "0.1.0",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc --project .",
     "build:watch": "tsc --project . --watch"
@@ -21,11 +20,12 @@
     "node": ">=8"
   },
   "bin": {
-    "init": "src/index.js"
+    "init": "dist/index.js"
   },
   "files": [
     "resources",
-    "src"
+    "src",
+    "dist"
   ],
   "dependencies": {
     "cpy": "^7.0.1",

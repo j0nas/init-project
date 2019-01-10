@@ -8,7 +8,7 @@ import opn from "opn";
 
 const execP = promisify(exec);
 
-const copyFiles = async (directoryName: string) => {
+export const copyFiles = async (directoryName: string) => {
   const targetPath = join(process.cwd(), directoryName);
   const cwd = join(__dirname, "..", "resources");
   await cpy(["**/*", ".gitignore"], targetPath, { cwd, parents: true });
@@ -16,7 +16,7 @@ const copyFiles = async (directoryName: string) => {
   return targetPath;
 };
 
-const gitInit = async () => {
+export const gitInit = async () => {
   const { stdout, stderr } = await execP("git init");
   if (stderr) {
     throw new Error(stderr);
@@ -25,10 +25,10 @@ const gitInit = async () => {
   return stdout;
 };
 
-const upgradePackageJson = async (packageJsonPath: string) =>
+export const upgradePackageJson = async (packageJsonPath: string) =>
   run({ packageFile: packageJsonPath, upgrade: true, upgradeAll: true });
 
-const installDependencies = async () =>
+export const installDependencies = async () =>
   new Promise((resolve, reject) => {
     const child = spawn("npm", ["install"]);
     child.stdout.on("data", data => process.stdout.write(data));
@@ -37,14 +37,14 @@ const installDependencies = async () =>
     child.on("exit", resolve);
   });
 
-const gitInitCommit = async () => {
+export const gitInitCommit = async () => {
   const { stdout, stderr } = await execP(
     'git add --all && git commit --message "init commit"'
   );
   return stdout || stderr;
 };
 
-const runDevServer = async () => {
+export const runDevServer = async () => {
   const child = spawn("npm", ["run", "dev"]);
   child.stdout.on("data", data => process.stdout.write(data));
   child.stderr.on("data", data => process.stdout.write(data));
@@ -53,13 +53,4 @@ const runDevServer = async () => {
   setTimeout(() => opn("http://localhost:3000"), 5000);
 
   return child;
-};
-
-module.exports = {
-  copyFiles,
-  gitInit,
-  upgradePackageJson,
-  installDependencies,
-  gitInitCommit,
-  runDevServer
 };
