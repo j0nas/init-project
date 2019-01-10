@@ -1,6 +1,11 @@
 {
   "name": "create-new-project",
   "version": "0.1.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --project .",
+    "build:watch": "tsc --project . --watch"
+  },
   "description": "Default Next.js project scaffolding",
   "keywords": [
     "scaffold",
@@ -30,9 +35,14 @@
     "valid-filename": "^2.0.1"
   },
   "devDependencies": {
+    "@types/cpy": "^5.1.0",
+    "@types/meow": "^5.0.0",
+    "@types/node": "^10.12.18",
+    "@types/opn": "^5.1.0",
     "husky": "^1.3.1",
     "prettier": "^1.15.3",
-    "pretty-quick": "^1.8.0"
+    "pretty-quick": "^1.8.0",
+    "typescript": "^3.2.2"
   },
   "husky": {
     "hooks": {

@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 "use strict";
 
-const isValid = require("valid-filename");
-const meow = require("meow");
-const { join } = require("path");
-const {
+// @ts-ignore
+import isValid from "valid-filename";
+import meow from "meow";
+import { join } from "path";
+import {
   copyFiles,
   gitInit,
-  upgradePackageJson,
-  installDependencies,
   gitInitCommit,
-  runDevServer
-} = require("./api");
+  installDependencies,
+  runDevServer,
+  upgradePackageJson
+} from "./api";
 
 (async () => {
   const cli = meow(`

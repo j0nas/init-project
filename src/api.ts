@@ -1,13 +1,14 @@
-const { join } = require("path");
-const { promisify } = require("util");
-const { exec, spawn } = require("child_process");
-const { run } = require("npm-check-updates");
-const cpy = require("cpy");
-const opn = require("opn");
+// @ts-ignore
+import { run } from "npm-check-updates";
+import { join } from "path";
+import { promisify } from "util";
+import { exec, spawn } from "child_process";
+import cpy from "cpy";
+import opn from "opn";
 
 const execP = promisify(exec);
 
-const copyFiles = async directoryName => {
+const copyFiles = async (directoryName: string) => {
   const targetPath = join(process.cwd(), directoryName);
   const cwd = join(__dirname, "..", "resources");
   await cpy(["**/*", ".gitignore"], targetPath, { cwd, parents: true });
@@ -24,7 +25,7 @@ const gitInit = async () => {
   return stdout;
 };
 
-const upgradePackageJson = async packageJsonPath =>
+const upgradePackageJson = async (packageJsonPath: string) =>
   run({ packageFile: packageJsonPath, upgrade: true, upgradeAll: true });
 
 const installDependencies = async () =>
