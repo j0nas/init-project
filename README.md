@@ -3,16 +3,16 @@
 > `npm install --global create-new-project`  
 > `init <my-project-name>`
 
-Simple Next.js scaffolding for new projects.  
+Simple scaffolding for new Next.js projects with Typescript.  
 Regardless of how simple the setup process is, it's still wasted brain power.
 
 <br/>
  
 Running `init <project-name>`:
 * creates `<project-name>` directory
-* adds project *package.json* with React, Next, Prettier, Husky setup
+* adds project *package.json* with React, Next, Typescript, Prettier, Husky setup
 * runs `npm install`
-* adds a .gitignore file with Node, MacOS and Intellij ignore rules 
+* adds a .gitignore file with predefined ignore rules 
 * initialises a new git project and creates an initial commit with all new files  
 * Starts the next.js dev server and opens localhost in your default browser    
   

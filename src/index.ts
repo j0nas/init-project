@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 "use strict";
 
-const isValid = require("valid-filename");
-const meow = require("meow");
-const { join } = require("path");
-const {
+// @ts-ignore
+import * as isValid from "valid-filename";
+import * as meow from "meow";
+import { join } from "path";
+import {
   copyFiles,
   gitInit,
-  upgradePackageJson,
-  createGitIgnore,
-  installDependencies,
   gitInitCommit,
-  runDevServer
-} = require("./api");
+  installDependencies,
+  runDevServer,
+  upgradePackageJson
+} from "./api";
 
 (async () => {
   const cli = meow(`
@@ -35,17 +35,11 @@ const {
 
   const packageJsonPath = join(createdProjectDirectory, "package.json");
   await upgradePackageJson(packageJsonPath);
-  console.log("Upgraded package.json dependency versions");
+  console.log(
+    "Upgraded package.json dependency versions, installing dependencies .."
+  );
 
-  await createGitIgnore(createdProjectDirectory, [
-    "Node",
-    "Global/JetBrains",
-    "Global/macOS"
-  ]);
-  console.log("Created .gitignore");
-
-  console.log("Installing npm dependencies..");
-  console.log(await installDependencies());
+  await installDependencies();
   console.log("Dependencies installed");
 
   console.log(await gitInitCommit());
