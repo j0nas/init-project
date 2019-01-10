@@ -4,7 +4,8 @@
     "lib": ["esnext"],
     "outDir": "dist",
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "src"
   },
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "resources"]
 }

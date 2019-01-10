@@ -9,7 +9,10 @@ import * as opn from "opn";
 export const copyFiles = async (directoryName: string) => {
   const targetPath = join(process.cwd(), directoryName);
   const cwd = join(__dirname, "..", "resources");
-  await cpy(["**/*", ".gitignore"], targetPath, { cwd, parents: true });
+  await cpy(["**/*", ".gitignore", ".babelrc"], targetPath, {
+    cwd,
+    parents: true
+  });
 
   return targetPath;
 };
