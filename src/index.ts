@@ -2,8 +2,8 @@
 "use strict";
 
 // @ts-ignore
-import isValid from "valid-filename";
-import meow from "meow";
+import * as isValid from "valid-filename";
+import * as meow from "meow";
 import { join } from "path";
 import {
   copyFiles,
@@ -39,7 +39,7 @@ import {
     "Upgraded package.json dependency versions, installing dependencies .."
   );
 
-  console.log(await installDependencies());
+  await installDependencies();
   console.log("Dependencies installed");
 
   console.log(await gitInitCommit());

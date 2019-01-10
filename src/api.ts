@@ -1,12 +1,10 @@
 // @ts-ignore
 import { run } from "npm-check-updates";
 import { join } from "path";
-import { promisify } from "util";
-import { exec, spawn } from "child_process";
-import cpy from "cpy";
-import opn from "opn";
-
-const execP = promisify(exec);
+import * as execa from "execa";
+import * as cpy from "cpy";
+// @ts-ignore
+import * as opn from "opn";
 
 export const copyFiles = async (directoryName: string) => {
   const targetPath = join(process.cwd(), directoryName);
@@ -17,8 +15,8 @@ export const copyFiles = async (directoryName: string) => {
 };
 
 export const gitInit = async () => {
-  const { stdout, stderr } = await execP("git init");
-  if (stderr) {
+  const { stdout, stderr, code } = await execa.shellSync("git init");
+  if (code !== 0) {
     throw new Error(stderr);
   }
 
@@ -28,29 +26,29 @@ export const gitInit = async () => {
 export const upgradePackageJson = async (packageJsonPath: string) =>
   run({ packageFile: packageJsonPath, upgrade: true, upgradeAll: true });
 
-export const installDependencies = async () =>
-  new Promise((resolve, reject) => {
-    const child = spawn("npm", ["install"]);
-    child.stdout.on("data", data => process.stdout.write(data));
-    child.stderr.on("data", data => process.stdout.write(data));
-    child.on("error", data => reject("npm install error:" + data));
-    child.on("exit", resolve);
-  });
+export const installDependencies = async () => {
+  try {
+    const child = execa("npm", ["install"]);
+    child.stdout.pipe(process.stdout);
+    child.stderr.pipe(process.stderr);
+    return await child;
+  } catch (e) {
+    console.log(`npm install error: ${e}`);
+  }
+};
 
 export const gitInitCommit = async () => {
-  const { stdout, stderr } = await execP(
+  const { stdout, stderr } = await execa.shellSync(
     'git add --all && git commit --message "init commit"'
   );
   return stdout || stderr;
 };
 
 export const runDevServer = async () => {
-  const child = spawn("npm", ["run", "dev"]);
-  child.stdout.on("data", data => process.stdout.write(data));
-  child.stderr.on("data", data => process.stdout.write(data));
-  child.on("error", data => console.log("Error!", data));
+  const child = execa("npm", ["run", "dev"]);
+  child.stdout.pipe(process.stdout);
+  child.stderr.pipe(process.stderr);
 
   setTimeout(() => opn("http://localhost:3000"), 5000);
-
   return child;
 };
