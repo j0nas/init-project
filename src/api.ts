@@ -37,6 +37,7 @@ export const installDependencies = async () => {
     return await child;
   } catch (e) {
     console.log(`npm install error: ${e}`);
+    return Promise.resolve();
   }
 };
 
