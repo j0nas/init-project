@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
     "lib": ["esnext"],
     "outDir": "dist",
     "sourceMap": true,

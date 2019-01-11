@@ -1,11 +1,9 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 
-interface Props {
+export interface Props {
   name: string;
 }
 
-const Example: FunctionComponent<Props> = ({ name }: { name: string }) => (
-  <h1>Hello, {name}</h1>
-);
+const Example = ({ name }: Props) => <h1>Hello, {name}</h1>;
 
 export default Example;
