@@ -2,8 +2,8 @@
 "use strict";
 
 // @ts-ignore
-import * as isValid from "valid-filename";
-import * as meow from "meow";
+import isValid from "valid-filename";
+import meow from "meow";
 import { join } from "path";
 import {
   copyFiles,

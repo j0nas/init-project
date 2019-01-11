@@ -9,6 +9,7 @@
     "outDir": "dist",
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "rootDir": "src"
   },
   "exclude": ["dist", "node_modules", "resources"]
