@@ -1,14 +1,13 @@
 // @ts-ignore
 import { run } from "npm-check-updates";
-import { join } from "path";
-import * as execa from "execa";
-import * as cpy from "cpy";
-// @ts-ignore
-import * as opn from "opn";
+import * as path from "path";
+import execa from "execa";
+import cpy from "cpy";
+import opn from "opn";
 
 export const copyFiles = async (directoryName: string) => {
-  const targetPath = join(process.cwd(), directoryName);
-  const cwd = join(__dirname, "..", "resources");
+  const targetPath = path.join(process.cwd(), directoryName);
+  const cwd = path.join(__dirname, "..", "resources");
   await cpy(["**/*", ".gitignore", ".babelrc"], targetPath, {
     cwd,
     parents: true
